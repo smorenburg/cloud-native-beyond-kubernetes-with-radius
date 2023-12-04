@@ -19,3 +19,11 @@ rad recipe register azure --environment default --template-kind bicep --template
 ```bash
 rad deploy app.bicep
 ```
+
+# Destroying the resources
+
+**Step 1:** Destroy the app.
+
+```bash
+rad env delete default --yes
+```

@@ -19,7 +19,7 @@ resource app 'Applications.Core/containers@2023-10-01-preview' = {
       }
     }
     connections: {
-      db: {
+      redis: {
         source: db.id
       }
     }
