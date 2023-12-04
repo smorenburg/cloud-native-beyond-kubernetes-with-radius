@@ -6,8 +6,8 @@ param application string
 @description('The ID of your Radius Environment. Set automatically by the rad CLI.')
 param environment string
 
-resource app 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'app'
+resource demo 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'demo'
   properties: {
     application: application
     container: {
@@ -44,7 +44,7 @@ resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
     routes: [
       {
         path: '/'
-        destination: 'http://app:3000'
+        destination: 'http://demo:3000'
       }
     ]
   }
