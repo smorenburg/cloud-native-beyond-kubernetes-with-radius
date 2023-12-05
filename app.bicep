@@ -1,9 +1,6 @@
 import radius as radius
 
-@description('The Radius Application ID. Injected automatically by the rad CLI.')
 param application string
-
-@description('The ID of your Radius Environment. Set automatically by the rad CLI.')
 param environment string
 
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
@@ -17,6 +14,12 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
           containerPort: 3000
         }
       }
+      livenessProbe: {
+        kind: 'httpGet'
+        containerPort: 3000
+        path: '/healthz'
+        initialDelaySeconds: 10
+      }
     }
     connections: {
       redis: {
@@ -29,11 +32,8 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 resource db 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
   name: 'db'
   properties: {
-    environment: environment
     application: application
-    recipe: {
-      name: 'azure'
-    }
+    environment: environment
   }
 }
 
