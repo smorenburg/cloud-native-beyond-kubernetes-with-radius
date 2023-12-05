@@ -5,7 +5,6 @@ secrets/
 # User-specific stuff
 .idea/
 .vscode/
-.rad/
 
 ### Terraform template
 # Local .terraform directories
