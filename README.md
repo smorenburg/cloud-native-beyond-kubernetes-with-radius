@@ -15,8 +15,8 @@ export RESOURCE_GROUP=rg-radius-stage-neu
 
 ```bash
 az ad sp create-for-rbac \
---role Contributor \
---scope /subscriptions/${SUBSCRIPTION_ID}
+  --role Contributor \
+  --scope /subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP}
 ```
 
 **Step 3:** Set the variables. Replace `client_id`, `client_secret`, and `tenant_id` with the service principal information.
@@ -31,8 +31,8 @@ export TENANT_ID=tenant_id
 
 ```bash
 az group create \
---location ${LOCATION} \
---name ${RESOURCE_GROUP}
+  --location ${LOCATION} \
+  --name ${RESOURCE_GROUP}
 ```
 
 **Step 5:** Install Radius on the Kubernetes cluster.
@@ -51,9 +51,9 @@ rad workspace create kubernetes ${ENVIRONMENT}
 
 ```bash
 rad credential register azure \
---client-id ${CLIENT_ID} \
---client-secret ${CLIENT_SECRET} \
---tenant-id ${TENANT_ID}
+  --client-id ${CLIENT_ID} \
+  --client-secret ${CLIENT_SECRET} \
+  --tenant-id ${TENANT_ID}
 ```
 
 **Step 8:** Create the Radius resource group for the environment.
@@ -72,18 +72,18 @@ rad env create azure --group ${ENVIRONMENT}
 
 ```bash
 rad deploy environments/azure.bicep \
---environment azure \
---group ${ENVIRONMENT} \
---parameters subscriptionId=${SUBSCRIPTION_ID} \
---parameters resourceGroup=${RESOURCE_GROUP}
+  --environment azure \
+  --group ${ENVIRONMENT} \
+  --parameters subscriptionId=${SUBSCRIPTION_ID} \
+  --parameters resourceGroup=${RESOURCE_GROUP}
 ```
 
 **Step 11:** Deploy the application
 
 ```bash
 rad deploy app.bicep \
---environment azure \
---group ${ENVIRONMENT}
+  --environment azure \
+  --group ${ENVIRONMENT}
 ```
 
 # Destroying the resources
