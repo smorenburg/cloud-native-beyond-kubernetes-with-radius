@@ -78,7 +78,7 @@ rad deploy environments/azure.bicep \
   --parameters resourceGroup=${RESOURCE_GROUP}
 ```
 
-**Step 11:** Deploy the application
+**Step 11:** Deploy the application.
 
 ```bash
 rad deploy app.bicep \
@@ -86,10 +86,12 @@ rad deploy app.bicep \
   --group ${ENVIRONMENT}
 ```
 
-# Destroying the resources
+# Removing the resources and application
 
-**Step 1:** Destroy the app.
+**Step 1:** Delete the application.
 
 ```bash
-rad env delete azure --yes
+rad env delete azure \
+  --group ${ENVIRONMENT} \
+  --yes
 ```
