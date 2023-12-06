@@ -10,15 +10,21 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
     container: {
       image: 'ghcr.io/radius-project/samples/demo:latest'
       ports: {
-        web: {
+        http: {
           containerPort: 3000
         }
       }
-      livenessProbe: {
+      readinessProbe:{
+        kind:'httpGet'
+        containerPort: 3000
+        path: '/healthz'
+        initialDelaySeconds: 10
+      }
+      livenessProbe:{
         kind: 'httpGet'
         containerPort: 3000
         path: '/healthz'
-        initialDelaySeconds: 15
+        initialDelaySeconds: 10
       }
     }
     connections: {
