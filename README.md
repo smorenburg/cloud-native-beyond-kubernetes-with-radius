@@ -5,13 +5,22 @@
 **Step 1:** Set the variables. Replace `subscription_id` with the subscription identifier.
 
 ```bash
+export APP=demo
 export SUBSCRIPTION_ID=subscription_id
 export ENVIRONMENT=staging
 export LOCATION=northeurope
-export RESOURCE_GROUP=rg-radius-stage-neu
+export RESOURCE_GROUP=rg-demo-stage-neu
 ```
 
-**Step 2:** Create a service principal and assign it the Contributor role to the subscription.
+**Step 2:** Create the Azure resource group for the application resources.
+
+```bash
+az group create \
+  --location ${LOCATION} \
+  --name ${RESOURCE_GROUP}
+```
+
+**Step 3:** Create a service principal and assign it the Contributor role to the subscription.
 
 ```bash
 az ad sp create-for-rbac \
@@ -19,7 +28,7 @@ az ad sp create-for-rbac \
   --scope /subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP}
 ```
 
-**Step 3:** Set the variables. Replace `client_id`, `client_secret`, and `tenant_id` with the service principal information.
+**Step 4:** Set the variables. Replace `client_id`, `client_secret`, and `tenant_id` with the service principal information.
 
 ```bash
 export CLIENT_ID=client_id
@@ -27,13 +36,6 @@ export CLIENT_SECRET=client_secret
 export TENANT_ID=tenant_id
 ```
 
-**Step 4:** Create the Azure resource group for the application resources.
-
-```bash
-az group create \
-  --location ${LOCATION} \
-  --name ${RESOURCE_GROUP}
-```
 
 **Step 5:** Install Radius on the Kubernetes cluster.
 
@@ -59,13 +61,13 @@ rad credential register azure \
 **Step 8:** Create the Radius resource group for the environment.
 
 ```bash
-rad group create ${ENVIRONMENT}
+rad group create ${APP}
 ```
 
 **Step 9:** Create the environment in the Radius resource group.
 
 ```bash
-rad env create azure --group ${ENVIRONMENT}
+rad env create azure --group ${APP}
 ```
 
 **Step 10:** Deploy the environment configuration.
@@ -73,7 +75,7 @@ rad env create azure --group ${ENVIRONMENT}
 ```bash
 rad deploy environments/azure.bicep \
   --environment azure \
-  --group ${ENVIRONMENT} \
+  --group ${APP} \
   --parameters subscriptionId=${SUBSCRIPTION_ID} \
   --parameters resourceGroup=${RESOURCE_GROUP}
 ```
@@ -83,7 +85,7 @@ rad deploy environments/azure.bicep \
 ```bash
 rad deploy app.bicep \
   --environment azure \
-  --group ${ENVIRONMENT}
+  --group ${APP}
 ```
 
 # Removing the resources and application
@@ -92,6 +94,6 @@ rad deploy app.bicep \
 
 ```bash
 rad env delete azure \
-  --group ${ENVIRONMENT} \
+  --group ${APP} \
   --yes
 ```
