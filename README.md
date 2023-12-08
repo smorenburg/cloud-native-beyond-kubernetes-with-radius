@@ -1,6 +1,6 @@
 # Radius Demo
 
-## Deploying and configuring the resources and application
+## Deploy and configure the resources and application
 
 **Step 1:** Set the variables. Replace `subscription_id` with the subscription identifier.
 
@@ -24,6 +24,7 @@ az group create \
 
 ```bash
 az ad sp create-for-rbac \
+  --display-name ${RESOURCE_GROUP} \
   --role Contributor \
   --scope /subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP}
 ```
@@ -88,12 +89,36 @@ rad deploy app.bicep \
   --group ${APP}
 ```
 
-# Removing the resources and application
+# Delete the application and resources
 
-**Step 1:** Delete the application.
+**Step 1:** Delete the environment (including the application).
 
 ```bash
 rad env delete azure \
   --group ${APP} \
   --yes
+```
+**Step 2:** Delete the resource group.
+
+```bash
+rad group delete ${APP} --yes
+```
+
+**Step 3:** Delete the workspace.
+
+```bash
+rad workspace delete ${ENVIRONMENT} --yes
+```
+
+**Step 4:** Delete the Azure resource group.
+
+```bash
+az group delete \
+  --name ${RESOURCE_GROUP} \
+  --yes
+```
+
+**Step 5:** Delete the app registration (including the service principal).
+```bash
+az ad app delete --id $(az ad app list --filter "displayName eq '${RESOURCE_GROUP}'" --query "[].appId" --output tsv)
 ```
