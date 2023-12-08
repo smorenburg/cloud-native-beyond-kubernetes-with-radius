@@ -6,7 +6,7 @@
 
 ```bash
 export APP=demo
-export SUBSCRIPTION_ID=subscription_id
+export SUBSCRIPTION_ID=<subscription_id>
 export ENVIRONMENT=staging
 export LOCATION=northeurope
 export RESOURCE_GROUP=rg-demo-stage-neu
@@ -32,9 +32,9 @@ az ad sp create-for-rbac \
 **Step 4:** Set the variables. Replace `client_id`, `client_secret`, and `tenant_id` with the service principal information.
 
 ```bash
-export CLIENT_ID=client_id
-export CLIENT_SECRET=client_secret
-export TENANT_ID=tenant_id
+export CLIENT_ID=<client_id>
+export CLIENT_SECRET=<client_secret>
+export TENANT_ID=<tenant_id>
 ```
 
 
