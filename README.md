@@ -45,33 +45,33 @@ export TENANT_ID=<tenant_id>
 rad install kubernetes
 ```
 
-**Step 9:** Create a workspace for the application.
+**Step 7:** Create a workspace for the application.
 
 ```bash
 rad workspace create kubernetes development
 ```
 
-**Step x:** Initialize Radius.
+**Step 8:** Initialize Radius.
 
 ```bash
 rad init
 ```
 
-**Step 7:** Connect to the Azure Kubernetes Service (AKS) cluster.
+**Step 9:** Connect to the Azure Kubernetes Service (AKS) cluster.
 
-**Step 8:** Install Radius.
+**Step 10:** Install Radius.
 
 ```bash
 rad install kubernetes
 ```
 
-**Step 9:** Create a workspace for the application.
+**Step 11:** Create a workspace for the application.
 
 ```bash
 rad workspace create kubernetes ${ENVIRONMENT}
 ```
 
-**Step 10:** Register the Azure credentials with Radius.
+**Step 12:** Register the Azure credentials with Radius.
 
 ```bash
 rad credential register azure \
@@ -80,19 +80,19 @@ rad credential register azure \
   --tenant-id ${TENANT_ID}
 ```
 
-**Step 11:** Create the Radius resource group for the environment.
+**Step 13:** Create the Radius resource group for the environment.
 
 ```bash
 rad group create ${APP}
 ```
 
-**Step 12:** Create the environment in the Radius resource group.
+**Step 14:** Create the environment in the Radius resource group.
 
 ```bash
 rad env create azure --group ${APP}
 ```
 
-**Step 13:** Deploy the environment configuration.
+**Step 15:** Deploy the environment configuration.
 
 ```bash
 rad deploy environments/azure.bicep \
@@ -102,29 +102,29 @@ rad deploy environments/azure.bicep \
   --parameters resourceGroup=${RESOURCE_GROUP}
 ```
 
-**Step x:** Switch to the development workspace.
+**Step 16:** Switch to the development workspace.
 
 ```bash
 rad workspace switch development
 ```
 
-**Step x:** Connect to the development Kubernetes cluster.
+**Step 17:** Connect to the development Kubernetes cluster.
 
-**Step 14:** Deploy the application.
+**Step 18:** Deploy the application.
 
 ```bash
 rad deploy app.bicep
 ```
 
-**Step x:** Switch to the environment workspace.
+**Step 19:** Switch to the environment workspace.
 
 ```bash
 rad workspace switch ${ENVIRONMENT}
 ```
 
-**Step 7:** Connect to the Azure Kubernetes Service (AKS) cluster.
+**Step 20:** Connect to the Azure Kubernetes Service (AKS) cluster.
 
-**Step 14:** Deploy the application.
+**Step 21** Deploy the application.
 
 ```bash
 rad deploy app.bicep \
@@ -160,10 +160,10 @@ rad group delete default --yes
 rad workspace delete development --yes
 ```
 
-**Step 6:** Switch to the staging workspace.
+**Step 6:** Switch to the environment workspace.
 
 ```bash
-rad workspace switch staging
+rad workspace switch ${ENVIRONMENT}
 ```
 
 **Step 7:** Connect to the Azure Kubernetes Service cluster.
