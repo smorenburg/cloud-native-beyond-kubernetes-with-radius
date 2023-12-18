@@ -3,8 +3,8 @@ import radius as radius
 param application string
 param environment string
 
-resource demo 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'demo'
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'frontend'
   properties: {
     application: application
     container: {
@@ -14,17 +14,11 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
           containerPort: 3000
         }
       }
-      readinessProbe:{
-        kind:'httpGet'
-        containerPort: 3000
-        path: '/healthz'
-        initialDelaySeconds: 10
-      }
       livenessProbe:{
         kind: 'httpGet'
         containerPort: 3000
         path: '/healthz'
-        initialDelaySeconds: 10
+        initialDelaySeconds: 20
       }
     }
     connections: {
@@ -50,7 +44,7 @@ resource gateway 'Applications.Core/gateways@2023-10-01-preview' = {
     routes: [
       {
         path: '/'
-        destination: 'http://demo:3000'
+        destination: 'http://frontend:3000'
       }
     ]
   }
