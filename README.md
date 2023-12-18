@@ -1,5 +1,7 @@
 # Radius demo
 
+![Radius demo](https://docs.radapp.io/tutorials/recipes/recipe-tutorial-diagram.png?raw=true)
+
 ## Deploy and configure the resources and application
 
 **Step 1:** Set the variables. Replace `subscription_id` with the subscription identifier.
