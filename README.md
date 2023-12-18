@@ -1,4 +1,4 @@
-# Radius Demo
+# Radius demo
 
 ## Deploy and configure the resources and application
 
@@ -20,7 +20,7 @@ az group create \
   --name ${RESOURCE_GROUP}
 ```
 
-**Step 3:** Create a service principal and assign it the Contributor role to the subscription.
+**Step 3:** Create a service principal and assign it the Contributor role to the resource group.
 
 ```bash
 az ad sp create-for-rbac \
