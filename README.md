@@ -56,7 +56,7 @@ rad workspace create kubernetes development
 **Step 8:** Initialize Radius.
 
 ```bash
-rad init --full
+rad init
 ```
 
 **Step 9:** Connect to the Azure Kubernetes Service (AKS) cluster.
