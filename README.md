@@ -22,13 +22,13 @@
       --name ${RESOURCE_GROUP}
     ```
 
-3. Create a service principal and assign it the Contributor role to the resource group.
+3. Create a service principal and assign it the Contributor role to the subscription.
 
     ```bash
     az ad sp create-for-rbac \
       --display-name ${RESOURCE_GROUP} \
       --role Contributor \
-      --scope /subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP}
+      --scope /subscriptions/${SUBSCRIPTION_ID}
     ```
 
 4. Set the variables. Replace `client_id`, `client_secret`, and `tenant_id` with the service principal information.
