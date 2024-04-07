@@ -1,4 +1,4 @@
-# Radius demo
+# Cloud native beyond Kubernetes with Radius
 
 ![Radius demo](https://docs.radapp.io/tutorials/recipes/recipe-tutorial-diagram.png?raw=true)
 
